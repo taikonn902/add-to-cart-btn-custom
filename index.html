@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add to Cart Button</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<style>
+  .add-to-cart-btn {
+    padding: 20px 20px;
+    font-size: 16px;
+    background-color: #FFD400;
+    color: #221F20;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all ease-in-out 0.3s;
+  }
+  
+  .add-to-cart-btn:hover {
+    color: #FFD400;
+    background-color: #221F20;
+  }
+  
+  .btn-text, .fa-solid {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 30px;
+    height: 30px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+  }
+  
+  @keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  
+  .added .loader {
+    opacity: 1;
+  }
+  
+  .added .btn-text, .added .fa-solid {
+    opacity: 0;
+  }
+  
+  .add-to-cart-btn.added {
+    color: #FFD400;
+    background-color: #221F20;
+  }
+  
+  .add-to-cart-btn.added:hover {
+    color: #FFD400;
+    background-color: #221F20;
+  }
+  
+  .add-to-cart-btn::after {
+    content: '\2714';
+    font-size: 24px;
+    color: #0c7023;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .added::after {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+</style>
+
+<body>
+  <button class="add-to-cart-btn" onclick="addToCart()">
+    <span class="btn-text"> <i class="fa-solid fa-basket-shopping"></i></span>
+    <span class="loader"></span>
+  </button>
+</body>
+
+<script>
+  function addToCart() {
+    var btn = document.querySelector('.add-to-cart-btn');
+    var loader = btn.querySelector('.loader');
+    var iconSpan = btn.querySelector('.btn-text');
+  
+    loader.style.opacity = '1'; 
+    iconSpan.style.opacity = '0';
+  
+    btn.style.color = '#FFD400'; 
+    btn.style.backgroundColor = '#221F20';
+  
+    setTimeout(function() {
+      loader.style.opacity = '0'; 
+      btn.classList.add('added'); 
+    }, 2000); 
+    
+    setTimeout(function() {
+      iconSpan.style.opacity = '1'; 
+      btn.style.color = ''; 
+      btn.style.backgroundColor = '';
+      btn.classList.remove('added');
+    }, 5000);
+  }
+</script>
+
+</html>
